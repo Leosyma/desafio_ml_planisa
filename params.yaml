@@ -1,0 +1,29 @@
+# Parâmetros do pipeline DVC
+
+preprocess:
+  test_size: 0.2
+  random_state: 42
+
+train:
+  random_state: 42
+  cv_folds: 5
+
+models:
+  random_forest:
+    n_estimators: [100, 200, 300]
+    max_depth: [10, 20, None]
+    min_samples_split: [2, 5, 10]
+    class_weight: ['balanced']
+  
+  xgboost:
+    n_estimators: [100, 200, 300]
+    max_depth: [3, 5, 7]
+    learning_rate: [0.01, 0.1, 0.3]
+    subsample: [0.8, 1.0]
+  
+  lightgbm:
+    n_estimators: [100, 200, 300]
+    max_depth: [3, 5, 7]
+    learning_rate: [0.01, 0.1, 0.3]
+    num_leaves: [31, 50, 100]
+

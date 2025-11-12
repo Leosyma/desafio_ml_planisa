@@ -1,0 +1,29 @@
+# Ignorar arquivos do DVC
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+.DS_Store
+*.log
+
+# MLflow
+experiments/
+mlruns/
+
+# Modelos grandes (serão versionados separadamente se necessário)
+models/*.pkl
+models/*.joblib
+models/*.h5
+

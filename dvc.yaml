@@ -1,0 +1,50 @@
+# Pipeline DVC
+# Execute com: dvc repro
+
+stages:
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+      - data/raw/procedimentos_medicos.csv
+      - src/data/preprocess.py
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state
+
+  train:
+    cmd: python src/models/train.py
+    deps:
+      - data/processed/train.csv
+      - src/models/train.py
+    outs:
+      - models/best_model.pkl
+      - reports/figures/confusion_matrix.png
+      - reports/figures/roc_curve.png
+    params:
+      - train.random_state
+      - train.cv_folds
+    metrics:
+      - metrics.json
+    plots:
+      - plots/confusion_matrix.json:
+          x: actual
+          y: predicted
+      - plots/roc_curve.json:
+          x: fpr
+          y: tpr
+
+  evaluate:
+    cmd: python src/models/evaluate.py
+    deps:
+      - data/processed/test.csv
+      - models/best_model.pkl
+      - src/models/evaluate.py
+    metrics:
+      - metrics_test.json
+    plots:
+      - plots/test_confusion_matrix.json
+      - plots/test_roc_curve.json
+

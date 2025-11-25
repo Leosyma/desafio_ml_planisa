@@ -39,7 +39,7 @@ def log_model_artifacts(model, model_name, artifacts_dir=None):
         artifacts_dir: Diretório com artifacts (gráficos, etc.)
     """
     # Registrar modelo
-    mlflow.sklearn.log_model(model, model_name)
+    mlflow.log_artifact("models/best_model.pkl", artifact_path="models")
     
     # Registrar artifacts se fornecidos
     if artifacts_dir and Path(artifacts_dir).exists():

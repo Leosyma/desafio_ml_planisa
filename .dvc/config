@@ -1,0 +1,12 @@
+[core]
+    remote = dagshub
+['remote "origin"']
+    url = s3://desafio_ml_planisa
+    endpointurl = https://dagshub.com/api/v1/repo-buckets/s3/Leosyma
+    region = us-east-1
+    access_key_id = Leosyma
+    secret_access_key = 0ebc4c0e93930a2656f57658cf29b40c64e8ad8b
+['remote "dagshub"']
+    url = https://dagshub.com/Leosyma/desafio_ml_planisa.dvc
+    auth = basic
+    user = Leosyma

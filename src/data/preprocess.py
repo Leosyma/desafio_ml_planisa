@@ -13,23 +13,19 @@ import yaml
 from sklearn.model_selection import train_test_split
 import os
 
-
+# Define a pasta
 if "__file__" in globals():
     BASE_DIR = Path(__file__).resolve().parents[2]
 else:
     BASE_DIR = Path(os.getcwd()).resolve()
 
-
+# Carrega parametros do modelo
 def load_params():
     with open(BASE_DIR / "params.yaml", "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-
+# Cria as features
 def build_features(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cria features derivadas relevantes a partir dos custos e volumes trimestrais.
-    Atende ao requisito de ter pelo menos 5 novas features.
-    """
     df = df.copy()
 
     # 1) custo médio anual
@@ -57,26 +53,24 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-
+# Pré-processamento do dado de entrada
 def preprocess():
     params = load_params()
     cfg_pre = params["preprocess"]
 
     raw_path = BASE_DIR / "data" / "raw" / "procedimentos_medicos.csv"
     df = pd.read_csv(raw_path)
+    
+    # Informações do dateset
+    print(df.info())
+    print(df.isna().sum())
+    
+    # Tratamento simples de missing
+    # Como temos poucos valores anulos iremos dropar ele
+    df = df.dropna()
 
     # Feature engineering
     df = build_features(df)
-
-    # Tratamento simples de missing
-    num_cols = df.select_dtypes(include=["number"]).columns.tolist()
-    cat_cols = df.select_dtypes(include=["object"]).columns.tolist()
-
-    for col in num_cols:
-        df[col] = df[col].fillna(df[col].median())
-
-    for col in cat_cols:
-        df[col] = df[col].fillna(df[col].mode()[0])
 
     # Separa target
     target_col = "target"
@@ -86,6 +80,7 @@ def preprocess():
     # One-hot encoding simples (árvores lidam bem com isso)
     X = pd.get_dummies(X, drop_first=True)
 
+    # Separa os dados em treino e teste
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -104,6 +99,7 @@ def preprocess():
     out_dir = BASE_DIR / "data" / "processed"
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    # Salva os dados
     train_df.to_csv(out_dir / "train.csv", index=False)
     test_df.to_csv(out_dir / "test.csv", index=False)
 

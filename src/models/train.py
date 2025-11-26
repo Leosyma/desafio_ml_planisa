@@ -38,24 +38,20 @@ from src.utils.mlflow_utils import (
     log_params_dict,
 )
 
-# -------------------------------------------------------------------
-# Paths base (funciona tanto em script quanto em notebook)
-# -------------------------------------------------------------------
+# Define a pasta
 if "__file__" in globals():
     BASE_DIR = Path(__file__).resolve().parents[2]
 else:
     BASE_DIR = Path(os.getcwd()).resolve()
 
-
-def load_params() -> dict:
-    """Carrega parâmetros do arquivo params.yaml."""
+# Carrega parametros do modelo
+def load_params():
     params_path = BASE_DIR / "params.yaml"
     with open(params_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-
+# Carrega o dataset de treino após ser processado
 def load_train_data():
-    """Carrega o conjunto de treino processado gerado pelo estágio 'preprocess'."""
     train_path = BASE_DIR / "data" / "processed" / "train.csv"
     df = pd.read_csv(train_path)
 

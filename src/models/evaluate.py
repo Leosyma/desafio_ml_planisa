@@ -41,17 +41,14 @@ from sklearn.metrics import (
 from src.utils.mlflow_utils import setup_mlflow, log_metrics_dict
 
 
-# -------------------------------------------------------------------
-# BASE_DIR compatível com script e notebook
-# -------------------------------------------------------------------
+# Define a pasta
 if "__file__" in globals():
     BASE_DIR = Path(__file__).resolve().parents[2]
 else:
     BASE_DIR = Path(os.getcwd()).resolve()
 
-
+# Carrega o dataset de teste após ser processado
 def load_test_data():
-    """Carrega o conjunto de teste processado."""
     test_path = BASE_DIR / "data" / "processed" / "test.csv"
     if not test_path.exists():
         raise FileNotFoundError(f"Arquivo de teste não encontrado: {test_path}")
@@ -65,9 +62,8 @@ def load_test_data():
     X_test = df_test.drop(columns=["target"])
     return X_test, y_test
 
-
+# Carrega o modelo salvo em models/best_model.pkl
 def load_best_model():
-    """Carrega o modelo salvo em models/best_model.pkl."""
     model_path = BASE_DIR / "models" / "best_model.pkl"
     if not model_path.exists():
         raise FileNotFoundError(f"Modelo não encontrado: {model_path}")

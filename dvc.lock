@@ -9,8 +9,8 @@ stages:
       size: 669525
     - path: src/data/preprocess.py
       hash: md5
-      md5: 7c2b8f8283f48ca7b4d3e894f000adc3
-      size: 3171
+      md5: 85249c0a9c3c8eae4f60bf05e114517e
+      size: 3046
     params:
       params.yaml:
         preprocess.random_state: 42
@@ -18,23 +18,23 @@ stages:
     outs:
     - path: data/processed/test.csv
       hash: md5
-      md5: 9029fc55ff5dc0238f54308a870a19f7
-      size: 280644
+      md5: 81c04c99e695da02ae9425ec7d19fd9a
+      size: 240224
     - path: data/processed/train.csv
       hash: md5
-      md5: 349885374c7ba98cbc9531761eae25ae
-      size: 1120320
+      md5: d997d63c9d435a7e84561291cda2eb1f
+      size: 958336
   train:
     cmd: python src/models/train.py
     deps:
     - path: data/processed/train.csv
       hash: md5
-      md5: 349885374c7ba98cbc9531761eae25ae
-      size: 1120320
+      md5: d997d63c9d435a7e84561291cda2eb1f
+      size: 958336
     - path: src/models/train.py
       hash: md5
-      md5: c66bf307e1ef08d4a9319379511a6504
-      size: 10676
+      md5: 11e2186fed00f0109f4e65bb544392f0
+      size: 10423
     params:
       params.yaml:
         train.cv_folds: 5
@@ -42,53 +42,53 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: 92030674033dff0a926d569a62e3e81d
-      size: 237
+      md5: 24415b482bae994c78a9008cb72d615e
+      size: 247
     - path: models/best_model.pkl
       hash: md5
-      md5: e348d9adeb047b8a40cb87046bb3b60d
-      size: 315384
+      md5: ae677d0c207c1f4fe2044296b71999fd
+      size: 291706
     - path: plots/confusion_matrix.json
       hash: md5
-      md5: dbe2bb324d4c323b908c93a9d2f30fee
-      size: 108001
+      md5: 2c998fa4ae72b6531eb920be32baedc4
+      size: 92476
     - path: plots/roc_curve.json
       hash: md5
-      md5: 40db8efa567f7f80c160efb7eb91b26b
-      size: 16095
+      md5: 6efc1dbe3abc52d06b0deee512a19c84
+      size: 5020
     - path: reports/figures/confusion_matrix.png
       hash: md5
-      md5: 7fe428498143813a64858d36fe1924be
-      size: 26300
+      md5: 122a17b355f2a9f016c8cf0e74e0e2b2
+      size: 26610
     - path: reports/figures/roc_curve.png
       hash: md5
-      md5: d26ea665ec8932836c1c641016c086ac
-      size: 25065
+      md5: 8d972061b161b5af13487f223415e861
+      size: 24384
   evaluate:
     cmd: python src/models/evaluate.py
     deps:
     - path: data/processed/test.csv
       hash: md5
-      md5: 9029fc55ff5dc0238f54308a870a19f7
-      size: 280644
+      md5: 81c04c99e695da02ae9425ec7d19fd9a
+      size: 240224
     - path: models/best_model.pkl
       hash: md5
-      md5: e348d9adeb047b8a40cb87046bb3b60d
-      size: 315384
+      md5: ae677d0c207c1f4fe2044296b71999fd
+      size: 291706
     - path: src/models/evaluate.py
       hash: md5
-      md5: 160edcc8005c181dfc39da862efb1c65
-      size: 6606
+      md5: f1b090c89f68d7efc6e00fa7ba267288
+      size: 6423
     outs:
     - path: metrics_test.json
       hash: md5
-      md5: 674b014fdb8f455e76d29551d39aca34
-      size: 167
+      md5: 61bb6c67e0a84cdebf7fecb15798a884
+      size: 180
     - path: plots/test_confusion_matrix.json
       hash: md5
-      md5: 68761ce95074cf1299eacd13ab4e279c
-      size: 27001
+      md5: 94a6937335ef73f0752e17af4a8e4980
+      size: 23140
     - path: plots/test_roc_curve.json
       hash: md5
-      md5: e72f1f0e307c0e4e17b9bb83a2c748bb
-      size: 4851
+      md5: 6974a7e30a22fdde6b6ca7a0e1a595d6
+      size: 1975

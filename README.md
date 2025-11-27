@@ -176,44 +176,42 @@ Foram criadas pelo menos **6 features derivadas**:
 1. **`custo_medio_ano`**  
    Média dos custos unitários trimestrais:
 
-   \[
-   custo\_medio\_ano = \frac{custo\_unitario\_trim1 + custo\_unitario\_trim2 + custo\_unitario\_trim3 + custo\_unitario\_trim4}{4}
-   \]
+   custo_medio_ano = (custo_unitario_trim1 
+                      + custo_unitario_trim2 
+                      + custo_unitario_trim3 
+                      + custo_unitario_trim4) / 4
 
 2. **`volume_total_ano`**  
    Soma dos volumes dos quatro trimestres:
 
-   \[
-   volume\_total\_ano = \sum_{i=1}^4 volume\_producao\_trimi
-   \]
+   volume_total_ano = volume_producao_trim1
+                 + volume_producao_trim2
+                 + volume_producao_trim3
+                 + volume_producao_trim4
 
 3. **`delta_custo_t4_t1`**  
    Diferença absoluta entre custo unitário do 4º e 1º trimestre:
 
-   \[
-   delta\_custo\_t4\_t1 = custo\_unitario\_trim4 - custo\_unitario\_trim1
-   \]
+   delta_custo_t4_t1 = custo_unitario_trim4 - custo_unitario_trim1
 
 4. **`delta_custo_pct_t4_t1`**  
    Diferença percentual de custo entre T4 e T1, com proteção para divisão por zero:
 
-   \[
-   delta\_custo\_pct\_t4\_t1 = \frac{custo\_unitario\_trim4 - custo\_unitario\_trim1}{custo\_unitario\_trim1}
-   \]
+   delta_custo_pct_t4_t1 = (custo_unitario_trim4 - custo_unitario_trim1) 
+                        / custo_unitario_trim1
 
 5. **`volume_medio_ano`**  
    Média dos volumes trimestrais:
 
-   \[
-   volume\_medio\_ano = \frac{\sum_{i=1}^4 volume\_producao\_trimi}{4}
-   \]
+   volume_medio_ano = (volume_producao_trim1
+                    + volume_producao_trim2
+                    + volume_producao_trim3
+                    + volume_producao_trim4) / 4
 
 6. **`ticket_medio_ano`**  
    Aproximação de ticket médio anual:
 
-   \[
-   ticket\_medio\_ano = custo\_medio\_ano \times volume\_medio\_ano
-   \]
+   ticket_medio_ano = custo_medio_ano * volume_medio_ano
 
 Essas features agregam informações de custo e volume ao longo do ano e capturam:
 

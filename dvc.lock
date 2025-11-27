@@ -9,8 +9,8 @@ stages:
       size: 669525
     - path: src/data/preprocess.py
       hash: md5
-      md5: 85249c0a9c3c8eae4f60bf05e114517e
-      size: 3046
+      md5: be9047dc1e724b1eccaff9d5d775c705
+      size: 7034
     params:
       params.yaml:
         preprocess.random_state: 42
